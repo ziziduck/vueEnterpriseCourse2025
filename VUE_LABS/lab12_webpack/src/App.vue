@@ -18,7 +18,9 @@ export default {
     },
     methods: {
         toggleCurrentStatus(id) {
-            console.log("should change id=", id)
+            const course = this.courses.find(c => c.id === id)
+            course.current = !course.current
+            console.log(`course with id:${id}  changed `)
         }
     }
 }
