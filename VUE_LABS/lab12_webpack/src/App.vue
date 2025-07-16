@@ -1,11 +1,10 @@
 <template>
-    <h1>Hello World from SFC(single file component)</h1>
+    <h1>簡單課程管理系統</h1>
+    <new-course @add-course="addCourse"></new-course>
     <ul>
         <course-intro v-for="course in courses" :key="course.id" :id="course.id" :name="course.name"
-            :duration="course.duration" :current="course.current"></course-intro>
-        <!-- <course-intro id="poop" name="python and oop" :duration=35 :current=true></course-intro>
-        <course-intro id="bdpy" name="python and big data" :duration=42 :current=false></course-intro>
-        <course-intro id="pykt" name="python and big data" :duration=8></course-intro> -->
+            :duration="course.duration" :current="course.current" @toggle-current="toggleCurrentStatus"
+            @delete-current="deleteCourse"></course-intro>
     </ul>
 </template>
 
@@ -18,6 +17,20 @@ export default {
             { id: "pykt", name: 'keras and tensorflow', duration: 35, current: true }
             ]
         }
+    },
+    methods: {
+        toggleCurrentStatus(id) {
+            const course = this.courses.find(c => c.id === id)
+            course.current = !course.current
+            console.log(`course with id:${id}  changed `)
+        },
+        addCourse(id, name, duration) {
+            const newCourse = { id: id, name: name, duration: duration, current: false }
+            this.courses.push(newCourse)
+        },
+        deleteCourse(id) {
+            this.courses = this.courses.filter(course => course.id !== id)
+        }
     }
 }
 </script>
@@ -28,7 +41,8 @@ export default {
     list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
     box-shadow: 0 4px 8px rgba(0, 0, 128, 0.26);
     margin: 1rem auto;
     border-radius: 5px;
