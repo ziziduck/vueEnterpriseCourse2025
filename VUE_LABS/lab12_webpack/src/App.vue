@@ -3,7 +3,8 @@
     <new-course @add-course="addCourse"></new-course>
     <ul>
         <course-intro v-for="course in courses" :key="course.id" :id="course.id" :name="course.name"
-            :duration="course.duration" :current="course.current" @toggle-current="toggleCurrentStatus"></course-intro>
+            :duration="course.duration" :current="course.current" @toggle-current="toggleCurrentStatus"
+            @delete-current="deleteCourse"></course-intro>
     </ul>
 </template>
 
@@ -26,6 +27,9 @@ export default {
         addCourse(id, name, duration) {
             const newCourse = { id: id, name: name, duration: duration, current: false }
             this.courses.push(newCourse)
+        },
+        deleteCourse(id) {
+            this.courses = this.courses.filter(course => course.id !== id)
         }
     }
 }
