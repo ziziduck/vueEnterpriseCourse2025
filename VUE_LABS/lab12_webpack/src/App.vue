@@ -2,10 +2,7 @@
     <h1>Hello World from SFC(single file component)</h1>
     <ul>
         <course-intro v-for="course in courses" :key="course.id" :id="course.id" :name="course.name"
-            :duration="course.duration" :current="course.current"></course-intro>
-        <!-- <course-intro id="poop" name="python and oop" :duration=35 :current=true></course-intro>
-        <course-intro id="bdpy" name="python and big data" :duration=42 :current=false></course-intro>
-        <course-intro id="pykt" name="python and big data" :duration=8></course-intro> -->
+            :duration="course.duration" :current="course.current" @toggle-current="toggleCurrentStatus"></course-intro>
     </ul>
 </template>
 
@@ -17,6 +14,11 @@ export default {
             { id: "bdpy", name: "python and big data", duration: 42, current: false },
             { id: "pykt", name: 'keras and tensorflow', duration: 35, current: true }
             ]
+        }
+    },
+    methods: {
+        toggleCurrentStatus(id) {
+            console.log("should change id=", id)
         }
     }
 }
