@@ -1,7 +1,9 @@
 <template>
     <div>
         <h1>元件1</h1>
-        <h3>{{ course }} 價格是 {{ price }}</h3>
+        <CourseIntro :courseId="courseId"
+        :courseFullName="courseFullName" :price="price"></CourseIntro>
+        <hr/>
         <h3>{{ courseDisplayName }}</h3>
         <button @click="course.duration = course.duration + 7">加一天課</button>
         <button @click="extraDuration">用函數加一天課</button>
@@ -9,16 +11,16 @@
         <input placeholder="courseId" v-model="courseId" />
         <input placeholder="courseFullName" v-model="courseFullName" />
         <hr />
-        <input type="text"
-        placeholder="alternative course full name"
-        ref="courseFullNameInput">
+        <input type="text" placeholder="alternative course full name" ref="courseFullNameInput">
         <button @click="setCourseFullNameInput">set course full name</button>
     </div>
 </template>
 
 <script>
 import { reactive, ref, computed, watch } from 'vue'
+import CourseIntro from './CourseIntro.vue'
 export default {
+    components: { CourseIntro },
     setup() {
         const price = ref(24000)
         const courseId = ref("")
@@ -53,7 +55,7 @@ export default {
         // }
         return {
             course, extraDuration, price, courseDisplayName,
-            courseId, courseFullName,courseFullNameInput,
+            courseId, courseFullName, courseFullNameInput,
             setCourseFullNameInput
         }
     }
