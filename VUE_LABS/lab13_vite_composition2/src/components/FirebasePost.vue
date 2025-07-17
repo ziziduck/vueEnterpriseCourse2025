@@ -12,11 +12,13 @@
             </li>
         </ul>
     </div>
+    <h1 v-if="!isLoading && error">{{ error }}</h1>
 </template>
 
 <script>
 // 換成自己的URL
 const URL1 = "https://vuecourse-e11e3-default-rtdb.firebaseio.com/courses.json"
+const URL2 = "https://vuecourse-e11e3-default-rtdb.firebaseio.com/courses.jjson"
 import axios from 'axios'
 export default {
     mounted() {
@@ -27,7 +29,8 @@ export default {
         return {
             course: { id: "BDPY", name: "Python and bih data", duration: 35 },
             courses: [],
-            isLoading: false
+            isLoading: false,
+            error: null
         }
     },
     methods: {
@@ -55,7 +58,7 @@ export default {
         },
         getByFetch() {
             this.courses = []
-            fetch(URL1, {
+            fetch(URL2, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -71,6 +74,9 @@ export default {
                     console.log(id)
                     this.courses.push(data[id])
                 }
+            }).catch(e => {
+                console.log("error=", e)
+                this.error = "failed to fetch data, please try again or check env..."
             })
 
         },
@@ -85,6 +91,7 @@ export default {
                         this.courses.push(result.data[id])
                     }
                     this.isLoading = false
+                    this.error = null
                 }
             })
         }
