@@ -1,4 +1,5 @@
 <script setup>
+import FirebasePost from './components/FirebasePost.vue';
 import MyComp1 from './components/MyComp1.vue';
 import MyComposition2 from './components/MyComposition2.vue';
 import MyOptions2 from './components/MyOptions2.vue';
@@ -29,6 +30,8 @@ const toggleComposition2 = () => {
   <div v-if="displayComposition2">
     <MyComposition2></MyComposition2>
   </div>
+  <br/>
+  <FirebasePost></FirebasePost>
 </template>
 
 <style scoped></style>
