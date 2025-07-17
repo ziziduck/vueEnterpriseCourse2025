@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 
 export default {
-    props: ["courseId", "courseFullName", "price"],
+    props: ["courseId", "courseFullName"],
     setup(props) {
         const course = computed(function () {
             if (props.courseFullName) {
@@ -18,8 +18,8 @@ export default {
                 return `${props.courseId}`
             }
         })
-
-        return { course }
+        const price = inject("price")
+        return { course, price }
     }
 }
 </script>
