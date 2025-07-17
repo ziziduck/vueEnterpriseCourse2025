@@ -12,15 +12,16 @@
 </template>
 
 <script>
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
 export default {
     setup() {
         const price = ref(24000)
         const courseId = ref("")
         const courseFullName = ref("")
-        const courseDisplayName = function () {
+        const courseDisplayName = computed(function () {
+            console.log(".")
             return courseId.value + '../..' + courseFullName.value
-        }
+        })
         const course = reactive({ name: "POOP", duration: 35 })
         function extraDuration() {
             course.duration = course.duration + 7
