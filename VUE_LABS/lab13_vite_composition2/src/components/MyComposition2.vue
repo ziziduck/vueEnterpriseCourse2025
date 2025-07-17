@@ -5,13 +5,16 @@
 </template>
 
 <script>
-import { onMounted } from 'vue';
+import { onBeforeUnmount, onMounted } from 'vue';
 
 export default {
     setup() {
         console.log("元件初始化")
         onMounted(()=>{
             console.log("composition api掛載之後")
+        })
+        onBeforeUnmount(()=>{
+            console.log("composition即將移除元件")
         })
         return {}
     }

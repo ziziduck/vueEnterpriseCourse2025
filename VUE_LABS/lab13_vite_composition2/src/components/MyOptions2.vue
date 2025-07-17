@@ -11,6 +11,9 @@
         },
         mounted() {
             console.log("掛載元件之後")
+        },
+        beforeUnmount() {
+            console.log("即將移除元件")
         }
     }
 </script>
